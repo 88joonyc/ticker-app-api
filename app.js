@@ -22,11 +22,11 @@ app.use(express.json());
 
 if (!isProduction) {
     app.use(cors(
-      {
-        origin:'*', 
-        credentials:true,            //access-control-allow-credentials:true
-        optionSuccessStatus:200,
-      }
+      // {
+      //   origin:'*', 
+      //   credentials:true,            //access-control-allow-credentials:true
+      //   optionSuccessStatus:200,
+      // }
     ));
 }
 app.use(helmet({
