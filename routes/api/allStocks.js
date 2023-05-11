@@ -70,7 +70,7 @@ router.get('/search/by/:keyword', (req, res) => {
   fetch(`${process.env.ALPHAAPIENDPOINT}/query?function=SYMBOL_SEARCH&keywords=${req.params.keyword}&apikey=${process.env.ALPHASECRETKEY}` , {
     "Access-Control-Allow-Origin" : "*",
     "Access-Control-Allow-Credentials" : true,
-    "Access-Control-Allow-Methods" : GET, POST, OPTIONS,
+    "Access-Control-Allow-Methods" : "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers" : "Origin, Content-Type, Accept",
   })
    .then(response => response.json())
