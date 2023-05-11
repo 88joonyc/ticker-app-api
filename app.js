@@ -19,15 +19,15 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors())
+// app.use(cors())
 
-if (!isProduction) {
+if (isProduction) {
     app.use(cors(
-      // {
-      //   origin:'*', 
-      //   credentials:true,            //access-control-allow-credentials:true
-      //   optionSuccessStatus:200,
-      // }
+      {
+        origin:'https://ticker-app-production.up.railway.app', 
+        credentials:true,            //access-control-allow-credentials:true
+        optionSuccessStatus:200,
+      }
     ));
 }
 app.use(helmet({

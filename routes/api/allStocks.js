@@ -21,14 +21,14 @@ router.get('/', (req, res) => {
   fetch(`${process.env.APIENDPOINT}/v3/reference/tickers`, headerOptions)
     .then( response => response.json())
     .then( json => res.send(json))
-    .catch(err => console.log(err))
+    .catch(err => res.send(err))
 });
 
 router.get('/details/:ticker', (req, res) => {
     fetch(`${process.env.APIENDPOINT}/v3/reference/tickers/${req.params.ticker.toUpperCase()}`, headerOptions)
     .then(response => response.json())
     .then(json => res.send(json))
-    .catch(err => console.log(err))
+    .catch(err => res.send(err))
 })
 
 router.get('/news/:ticker', async (req, res) => {
@@ -61,7 +61,7 @@ router.post('/search', jsonParser, (req, res) => {
   fetch(`${process.env.APIENDPOINT}/v2/aggs/ticker/${ticker.toUpperCase()}/range/${multiplier}/${timespan}/${start}/${end}?adjusted=${adjusted}&sort=${sort}}&limit=${limit}`, headerOptions)
     .then(response => response.json())
     .then(json => res.send(json))
-    .catch(err => console.log(err))
+    .catch(err => res.send(err))
 
 });
 
@@ -75,7 +75,7 @@ router.get('/search/by/:keyword', (req, res) => {
   })
    .then(response => response.json())
    .then(data => res.send(data))
-   .catch(err => console.log(err))
+   .catch(err => res.send(err))
 });
 
 // yahoo finance - fetches multiple stocks for user homepage
@@ -89,6 +89,7 @@ router.post('/search/multiple', async (req, res) => {
     to,
     period: 'd'
   }).then(data => res.send(data))
+  .catch(err => res.send(err))
 });
 
 
