@@ -40,8 +40,6 @@ app.use(helmet({
 // app.use(csurf())
 app.use(routes); 
 
-
-
 app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
     err.title = "Resource Not Found";
@@ -79,10 +77,8 @@ app.use((err, _req, res, _next) => {
 //   );
 // });
 
-// const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000
 
-// app.listen(PORT, () => console.log(`listening on port:${PORT}`))
-
-
+app.listen(PORT, () => console.log(`listening on port:${PORT}`))
 
 module.exports = app;

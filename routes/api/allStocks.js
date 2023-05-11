@@ -11,7 +11,9 @@ const jsonParser = bodyParser.json();
 const headerOptions = {
     method: 'GET',
     headers: {
-        'Authorization': `Bearer ${process.env.APISECRETEKEY}`
+        'Authorization': `Bearer ${process.env.APISECRETEKEY}`,
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
+        'Access-Control-Allow-Credentials': 'true'
     }
 }
 
@@ -32,7 +34,7 @@ router.get('/details/:ticker', (req, res) => {
 
 router.get('/news/:ticker', async (req, res) => {
   try {
-    const news = await fetch(`https://api.polygon.io/v2/reference/news?ticker=${req.params.ticker.toUpperCase()}`, headerOptions)
+    const news = await fetch(`/news?ticker=${req.params.ticker.toUpperCase()}`, headerOptions)
     if (news.ok) {
       const json = await news.json()
       console.log(json)
