@@ -12,8 +12,10 @@ const headerOptions = {
     method: 'GET',
     headers: {
         'Authorization': `Bearer ${process.env.APISECRETEKEY}`,
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
-        'Access-Control-Allow-Credentials': 'true'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers' : 'Origin, Content-Type, Accept'
     }
 }
 
@@ -68,7 +70,14 @@ router.post('/search', jsonParser, (req, res) => {
 
 // to alphavantage.io - uses polygoin (which is a paid service but free on alpah)
 router.get('/search/by/:keyword', (req, res) => {
-  fetch(`${process.env.ALPHAAPIENDPOINT}/query?function=SYMBOL_SEARCH&keywords=${req.params.keyword}&apikey=${process.env.ALPHASECRETKEY}`)
+  fetch(`${process.env.ALPHAAPIENDPOINT}/query?function=SYMBOL_SEARCH&keywords=${req.params.keyword}&apikey=${process.env.ALPHASECRETKEY}` , {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers' : 'Origin, Content-Type, Accept'
+    }
+  })
    .then(response => response.json())
    .then(data => res.send(data))
    .catch(err => console.log(err))
