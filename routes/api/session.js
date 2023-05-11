@@ -22,15 +22,15 @@ const validateLogin = [
 ];
 // log user in
 
-router.use(
-  csurf({
-      cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: false,
-      },
-  })
-);
+// router.use(
+//   csurf({
+//       cookie: {
+//       secure: isProduction,
+//       sameSite: isProduction && "Lax",
+//       httpOnly: false,
+//       },
+//   })
+// );
 
 router.post(
     '/',
