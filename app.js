@@ -28,7 +28,7 @@ if (isProduction) {
         credentials:true,            //access-control-allow-credentials:true
         optionSuccessStatus:200,
       }
-    ));
+  ));
 }
 app.use(helmet({
     contentSecurityPolicy: false
@@ -45,9 +45,9 @@ app.use(helmet({
 //     })
 // );
 
-app.use(csurf({
-  cookie: true
-}))
+// app.use(csurf({
+//   cookie: true
+// }))
 
 app.use(routes); 
 
