@@ -33,7 +33,7 @@ router.get('/details/:ticker', (req, res) => {
 
 router.get('/news/:ticker', async (req, res) => {
   try {
-    const news = await fetch(`/news?ticker=${req.params.ticker.toUpperCase()}`, headerOptions)
+    const news = await fetch(`${process.env.APIENDPOINT}/news?ticker=${req.params.ticker.toUpperCase()}`, headerOptions)
     if (news.ok) {
       const json = await news.json()
       console.log(json)
