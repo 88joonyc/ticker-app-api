@@ -45,9 +45,9 @@ app.use(helmet({
 //     })
 // );
 
-app.use(csurf({
-  cookie: true
-}))
+// app.use(csurf({
+//   cookie: true
+// }))
 
 app.use(routes); 
 
