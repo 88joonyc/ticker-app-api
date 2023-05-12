@@ -45,9 +45,12 @@ app.use(helmet({
 //     })
 // );
 
-// app.use(csurf({
-//   cookie: true
-// }))
+app.use(csurf({
+  cookie: {
+    httpOnly:false,
+    secure: true
+  }
+}))
 
 app.use(routes); 
 
