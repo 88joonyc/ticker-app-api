@@ -48,7 +48,7 @@ app.use(helmet({
 app.use(csurf({
   cookie: {
     httpOnly:false,
-    secure: true
+    secure: false
   }
 }))
 
