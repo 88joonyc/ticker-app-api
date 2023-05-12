@@ -45,12 +45,12 @@ app.use(helmet({
 //     })
 // );
 
-app.use(csurf({
-  cookie: {
-    httpOnly:false,
-    secure: false
-  }
-}))
+// app.use(csurf({
+//   cookie: {
+//     httpOnly:false,
+//     secure: false
+//   }
+// }))
 
 app.use(routes); 
 
