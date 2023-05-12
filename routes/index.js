@@ -5,7 +5,7 @@ const apiRouter = require('./api');
 
 router.use('/api', apiRouter);
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'production') {
     const path = require('path');
     // Serve the frontend's index.html file at the root route
     router.get('/', (req, res) => {
@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
     router.get('/api/csrf/restore', (req, res) => {
 
       console.log('----------------------huit-------------------------')
