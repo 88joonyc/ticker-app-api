@@ -16,8 +16,8 @@ const app = express();
 
 app.use(morgan('dev'));
 
-app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.json());
 // app.use(cors())
 
@@ -46,9 +46,7 @@ app.use(helmet({
 // );
 
 app.use(csurf({
-  cookie: {
-    httpOnly: true
-  }
+  cookie: true
 }))
 
 app.use(routes); 
