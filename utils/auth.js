@@ -17,8 +17,10 @@ const setTokenCookie = (res, user) => {
     res.cookie('token', token, {
       maxAge: expiresIn * 1000, 
       httpOnly: true,
+      domain:"https://ticker-app-production.up.railway.app",
       secure: isProduction,
       sameSite: isProduction && "Lax",
+
     });
   
     return token;
