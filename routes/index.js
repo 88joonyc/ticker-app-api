@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 if (process.env.NODE_ENV === 'production') {
   
-  router.get('/api/csrf/restore', (req, res) => {
+  router.get('/', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken(), {
       maxAge: 604800 * 1000, 
       httpOnly: false,
