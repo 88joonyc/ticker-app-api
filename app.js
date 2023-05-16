@@ -25,8 +25,8 @@ if (isProduction) {
     app.use(cors(
       {
         origin:'https://ticker-app-production.up.railway.app', 
-        credentials:true,            //access-control-allow-credentials:true
-        optionSuccessStatus:200,
+        credentials: true,            //access-control-allow-credentials:true
+        optionSuccessStatus: 200,
       }
   ));
 }
@@ -35,15 +35,15 @@ app.use(helmet({
 }));
 
 // may need to remove due to error from mapping numbers
-app.use(
-    csurf({
-        cookie: {
-        secure: true,
-        sameSite: "none",
-        httpOnly: false,
-        },
-    })
-);
+// app.use(
+//     csurf({
+//         cookie: {
+//         secure: true,
+//         sameSite: "none",
+//         httpOnly: false,
+//         },
+//     })
+// );
 
 // app.use(csurf({
 //   cookie: {

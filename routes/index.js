@@ -28,7 +28,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  
   router.get('/api/csrf/restore', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken(), {
       maxAge: 604800 * 1000, 
@@ -37,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
       sameSite: 'none',
     });
     res.status(201).json({});
+    return res.json({"XSRF-token" : req.csrfToken()})
   });
 }
 
