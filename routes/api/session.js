@@ -52,7 +52,7 @@ router.post(
   
       return res.json({
         user,
-        token
+        // token
       });
     }),
 );
