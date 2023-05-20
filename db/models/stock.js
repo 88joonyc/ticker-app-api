@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     if (found) {
-      Stock.updateStock({ userId, ticker, amount: originalPrice, qty })
+      return Stock.updateStock({ userId, ticker, amount: originalPrice, qty })
     } else {
       const stock = await Stock.create({
         ticker,
