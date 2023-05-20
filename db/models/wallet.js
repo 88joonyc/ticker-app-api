@@ -1,6 +1,4 @@
 'use strict';
-// const db = require('./models');
-// db.sequelize.init();
 
 module.exports = (sequelize, DataTypes) => {
   var Wallet = sequelize.define('Wallet', {
@@ -53,19 +51,26 @@ module.exports = (sequelize, DataTypes) => {
 
   Wallet.updateWallet = async function({userId, accountType, amount}) {
     
-    const wallet = await Wallet.findOne({
+    
+    const found = await Wallet.findOne({
       where: {
         userId,
         accountType
       }
     });
-    
-    const json = await wallet.update(
-        {'buyingPower': found.buyingPower - parseInt(amount) },
-        { where: { "id": wallet.id } }
-      );
 
-    return await Wallet.findByPk(wallet.id)
+    if (found.buyingPower > amount) {
+
+      const json = await Wallet.update(
+          {'buyingPower': found.buyingPower - parseInt(amount) },
+          { where: { "id": found.id } }
+        );
+  
+      return await Wallet.findByPk(found.id)
+    } else {
+      return {status: 400, message: 'User has insufficient funds. Please deposit more money into your Gotham hood bank account! '}
+    }
+    
   };
 
   return Wallet;

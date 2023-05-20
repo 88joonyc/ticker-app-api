@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     originalPrice: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.REAL,
       allowNull: false,
     },
     lastPrice: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.REAL,
       allowNull: false,
     },
     qty: {
@@ -37,30 +37,51 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Stock.purchase = async function ({ ticker, originalPrice, qty, userId }) {
-    const stock = await Stock.create({
-      ticker,
-      originalPrice,
-      qty,
-      userId
-    });
-    return await stock.findByPk(wallet.id)
+
+    originalPrice = parseFloat(originalPrice).toFixed(2)
+
+    const found = await Stock.findOne({
+      where: {
+        userId,
+        ticker
+      }
+    })
+
+    if (found) {
+      Stock.updateStock({ userId, ticker, amount: originalPrice, qty })
+    } else {
+      const stock = await Stock.create({
+        ticker,
+        originalPrice,
+        lastPrice: originalPrice,
+        qty,
+        userId
+      });
+
+      return await Stock.findByPk(stock.id)
+    }
   };
 
-  Stock.update = async function ({ userId, ticker, amount}) {
+  Stock.updateStock = async function ({ userId, ticker, amount, qty }) {
+
     const stock = await Stock.findOne({
       where: {
         userId,
         ticker
       }
-
     })
-
-    const data = await Stock.update(
-      {'lastPrice': stock.lastPrice - amount },
-      { where: { id: wallet.id } }
-    )
     
-    return await Stock.findByPk(wallet.id)
+    await Stock.update(
+      { 'lastPrice': amount+123 },
+      { where: { "id": stock.dataValues.id } },
+    )
+      
+    await Stock.update(
+      { 'qty': stock.dataValues.qty + parseInt(qty) },
+      { where: { "id": stock.dataValues.id } }
+    )
+
+    return await Stock.findByPk(stock.dataValues.id)
 
   }
 
