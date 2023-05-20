@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     return await stocks
   };
 
+  
   Stock.purchase = async function ({ ticker, originalPrice, qty, userId }) {
 
     originalPrice = parseFloat(originalPrice).toFixed(2)
@@ -58,11 +59,10 @@ module.exports = (sequelize, DataTypes) => {
         userId
       });
 
-      return await Stock.findByPk(stock.id)
+      return {type:  'purchase', response: await Stock.findByPk(stock.id)}
     }
   };
 
- 
   Stock.updateStock = async function ({ userId, ticker, amount, qty }) {
 
     const stock = await Stock.findOne({
