@@ -62,6 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
+ 
   Stock.updateStock = async function ({ userId, ticker, amount, qty }) {
 
     const stock = await Stock.findOne({
@@ -72,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     })
     
     await Stock.update(
-      { 'lastPrice': amount+123 },
+      { 'lastPrice': amount },
       { where: { "id": stock.dataValues.id } },
     )
       
@@ -81,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       { where: { "id": stock.dataValues.id } }
     )
 
-    return await Stock.findByPk(stock.dataValues.id)
+    return {type: "update:", response: await Stock.findByPk(stock.dataValues.id)}
 
   }
 
