@@ -59,6 +59,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
 
+    console.log('checkmyhwal;l;e', amount)
+
     if (found.buyingPower > amount) {
 
       const json = await Wallet.update(
