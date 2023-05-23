@@ -59,12 +59,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
 
-    console.log('checkmyhwal;l;e', amount)
-
     if (found.buyingPower > amount) {
 
       const json = await Wallet.update(
-          {'buyingPower': found.buyingPower + parseInt(amount) },
+          {'buyingPower': found.buyingPower - parseInt(amount) },
           { where: { "id": found.id } }
         );
   
