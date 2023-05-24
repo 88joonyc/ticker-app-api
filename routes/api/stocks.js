@@ -4,8 +4,9 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 
 const {  Stock } = require('../../db/models');
+const { requireAuth } = require('../../utils/auth');
 
-router.get('/:id', asyncHandler(async (req, res) => {
+router.get('/:id', requireAuth, asyncHandler(async (req, res) => {
         const { id } = req.params;
         
         const stocks = await Stock.all({ id })
@@ -17,7 +18,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
     })
 );
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', requireAuth, asyncHandler(async (req, res) => {
 
         const { ticker, originalPrice, qty, userId } = req.body
 
@@ -32,7 +33,7 @@ router.post('/', asyncHandler(async (req, res) => {
     })
 );
 
-router.post('/update', asyncHandler(async (req, res) => {
+router.post('/update', requireAuth, asyncHandler(async (req, res) => {
         const { userId, ticker, amount, qty } = req.body 
 
         const response = await Stock.updateStock({

@@ -3,6 +3,7 @@ const router = express.Router();
 const yahooFinance = require('yahoo-finance');
 const bodyParser = require('body-parser');
 const { error } = require('console');
+const { requireAuth } = require('../../utils/auth');
 
 // const app = express();
 const jsonParser = bodyParser.json();
@@ -77,7 +78,7 @@ router.get('/search/by/:keyword', (req, res) => {
 });
 
 // yahoo finance - fetches multiple stocks for user homepage
-router.post('/search/multiple', async (req, res) => {
+router.post('/search/multiple', requireAuth, async (req, res) => {
 
   var { symbols, from, to } = req.body
   
