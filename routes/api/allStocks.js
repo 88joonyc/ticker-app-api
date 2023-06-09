@@ -78,7 +78,7 @@ router.get('/search/by/:keyword', (req, res) => {
 });
 
 // yahoo finance - fetches multiple stocks for user homepage
-router.post('/search/multiple', requireAuth, async (req, res) => {
+router.post('/search/multiple',  async (req, res) => {
 
   var { symbols, from, to } = req.body
   
