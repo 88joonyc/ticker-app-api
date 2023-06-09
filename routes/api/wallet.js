@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 const { Wallet } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
-router.get('/:id', requireAuth, asyncHandler(async (req,res) => {
+router.get('/:id', asyncHandler(async (req,res) => {
         const { id } = req.params;
         const wallets = await Wallet.all({ id });
 
@@ -15,7 +15,7 @@ router.get('/:id', requireAuth, asyncHandler(async (req,res) => {
     })
 );
 
-router.post('/', requireAuth, asyncHandler(async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
         const {   userId, accountType, amount } = req.body;
         const wallet = await Wallet.make({   userId, accountType, amount });
 
@@ -25,7 +25,7 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     })
 );
 
-router.post('/update', requireAuth, asyncHandler( async (req, res) => {
+router.post('/update', asyncHandler( async (req, res) => {
         const { userId, accountType, amount } = req.body;
         const wallet = await Wallet.updateWallet({ userId, accountType, amount });
 
