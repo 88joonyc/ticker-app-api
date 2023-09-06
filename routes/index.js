@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
     const path = require('path');
     // Serve the frontend's index.html file at the root route
     router.get('/', (req, res) => {
-      console.log('fiondme-------------------------------------------', req.csrfToken())
+      
       return res.cookie('XSRF-TOKEN', req.csrfToken(),  {
         maxAge: 604800 * 1000, 
         httpOnly: false,
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
   
     // Serve the frontend's index.html file at all other routes NOT starting with /api
     router.get(/^(?!\/?api).*/, (req, res) => {
-      console.log('fiondme2-------------------------------------------', req.csrfToken())
+      
       return res.cookie('XSRF-TOKEN', req.csrfToken(),  {
         maxAge: 604800 * 1000, 
         httpOnly: false,
